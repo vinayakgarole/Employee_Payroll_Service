@@ -35,7 +35,7 @@ public class EmployeePayrollService {
         /*
          * Display the employee data in store in employeePayrollList
          */
-        System.out.println("Given Employee Data is : " + employeePayrollList);
+        System.out.println("Given Employee Data is: " + employeePayrollList);
     }
 
     /*
