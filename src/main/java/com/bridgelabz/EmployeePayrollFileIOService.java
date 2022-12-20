@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EmployeePayrollFileIOService {
 
-    private static String FILE_PATH = "C:\\Users\\chetan bhagat\\IdeaProjects\\EmployeePayrollService\\src\\main\\resources\\payroll-file.txt";
+    private static String FILE_PATH = "C:\\Users\\Infinty system\\IdeaProjects\\Employee_Payroll_Service\\src\\main\\java\\com\\bridgelabz\\PayrollFile.txt";
 
     //write employee payroll date method
     public void writeData(List<EmployeePayrollData> employeeList) {
@@ -22,5 +22,25 @@ public class EmployeePayrollFileIOService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //printData method in try-catch block
+    public void printData() {
+        try {
+            Files.lines(new File(FILE_PATH).toPath()).forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //CountEntries method which is of long type
+    public long countEntries() {
+        long entries = 0;//initialized variable
+        try {
+            entries = Files.lines(new File(FILE_PATH).toPath()).count();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return entries;
     }
 }
