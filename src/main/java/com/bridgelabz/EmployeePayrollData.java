@@ -2,29 +2,20 @@ package com.bridgelabz;
 
 public class EmployeePayrollData {
 
-    // Variables
+    //declare variables
     int id;
     String name;
     double salary;
 
-    /*
-     * Create a parameterized constructor name as EmployeePayrollData
-     */
+    //create parameterized constructor using id, name, salary parameters
     public EmployeePayrollData(int id, String name, double salary) {
-        /*
-         * The "this" keyword is used to refer to the current object.
-         */
         this.id = id;
         this.name = name;
         this.salary = salary;
     }
 
-    /*
-     * Overriding the toString() method
-     * Return employee id ,salary and name.
-     */
     @Override
-    public String toString() {
+    public String toString() {//returns the string representation of the object
         return "EmployeePayrollData{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

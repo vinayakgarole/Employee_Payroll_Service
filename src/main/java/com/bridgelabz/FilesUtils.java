@@ -10,13 +10,10 @@ public class FilesUtils {
      * Return delete content
      */
     public static boolean deleteFiles(File contentToDelete) {
-
-        File[] allContents = contentToDelete.listFiles();
-
-        if (allContents != null) {
-
-            for (File eachFile : allContents) {
-                deleteFiles(eachFile);
+        File[] allData = contentToDelete.listFiles();//using variable call listFiles method that will be store in allData variable
+        if (allData != null) {
+            for (File file : allData) {//iterate for each loop over addData
+                deleteFiles(file);//calling method
             }
         }
         return contentToDelete.delete();

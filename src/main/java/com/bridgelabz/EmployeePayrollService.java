@@ -6,93 +6,44 @@ import java.util.Scanner;
 
 public class EmployeePayrollService {
 
-    private List<EmployeePayrollData> employeePayrollList;
+    //create an enum
+    public enum IOService {
+        CONSOLE_IO, FILE_IO
+    };
 
-    /*
-     * Create a default constructor
-     */
-    public EmployeePayrollService() {
+    private List<EmployeePayrollData> employeePayrollList;//declare variable
 
-    }
-
-    /*
-     * create a parameterized Constructor name as EmployeePayrollService
-     * EmployeePayrollList in all data stored about employee
-     */
-    public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
-
-        /*
-         *  The "this" keyword is used to refer to the current object.
-         */
+    public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {//Parameterized constructor
         this.employeePayrollList = employeePayrollList;
     }
 
-    /*
-     * Create a method name as write
-     * Method to print data back to console
-     */
-    private void write() {
-        /*
-         * Display the employee data in store in employeePayrollList
-         */
-        System.out.println("Given Employee Data is: " + employeePayrollList);
-    }
-
-    /*
-     * Create a method name as readEmployeeData
-     * Method to take data from console
-     */
-    private void readEmployeeData(Scanner sc) {
-        /*
-         * Enter 1st name employee
-         */
-        System.out.println("Enter your Name: ");
-        String name = sc.nextLine();
-        /*
-         * Enter employee id for ex- 1 or 2 like that
-         */
-        System.out.println("Enter your ID: ");
-        int id = sc.nextInt();
-        /*
-         * Enter employee salary ,For ex - 5000 like that
-         */
-        System.out.println("Enter your Salary: ");
-        double salary = sc.nextDouble();
-        /*
-         * Create object for  EmployeePayrollData class and object name is empData
-         */
-        EmployeePayrollData empData = new EmployeePayrollData(id, name, salary);
-        /*
-         * Add the all data to employeePayrollList in empData
-         */
-        employeePayrollList.add(empData);
-    }
-
-    /*
-     * Create a main method, all program execute in main method
-     */
     public static void main(String[] args) {
+        //create Arraylist which is of employee payroll data type
+        ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
+        //create object of employee payroll service class using new keyword
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);//constructor
+        Scanner consoleInputReader = new Scanner(System.in);
+        employeePayrollService.readEmployeePayrollData(consoleInputReader);//calling read method using obj reference
+        employeePayrollService.writeEmployeePayrollData(IOService.CONSOLE_IO);//calling write method using obj reference
+    }
 
-        /*
-         * Create a scanner class object
-         */
-        Scanner sc = new Scanner(System.in);
-        /*
-         * Create arraylist, crete a object name as employeePayrollList
-         */
-        ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<EmployeePayrollData>();
+    // Create the Read Employee Payroll Data Method
+    private void readEmployeePayrollData(Scanner consoleInputReader) {
+        System.out.println("Enter Employee ID: ");
+        int id = consoleInputReader.nextInt();
+        System.out.println("Enter Employee Name: ");
+        String name = consoleInputReader.next();
+        System.out.println("Enter Employee Salary: ");
+        double salary = consoleInputReader.nextDouble();
+        employeePayrollList.add(new EmployeePayrollData(id, name, salary));//add data into employeePayrollList
+    }
 
-        /*
-         * Crete object name as employeePayrollService
-         */
-        EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
-        /*
-         * Calling readEmployeeData method from object name as employeePayrollService
-         */
-        employeePayrollService.readEmployeeData(sc);
-        /*
-         * Calling write method from object name as employeePayrollService
-         */
-        employeePayrollService.write();
+    //Write employee payroll data method with parameter
+    public void writeEmployeePayrollData(IOService writeTo) {
+        if (writeTo.equals(IOService.CONSOLE_IO))
+            System.out.println("\nWriting Employee Payroll Data to Console\n" + employeePayrollList);//print employeePayrollList
+        else if (writeTo.equals(IOService.FILE_IO)) {
+            new EmployeePayrollFileIOService().writeData(employeePayrollList);
+        }
     }
 }
